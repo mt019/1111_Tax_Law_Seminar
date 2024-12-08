@@ -1,0 +1,166 @@
+\documentclass[11pt,a4paper]{article}
+% \documentclass[UTF8,a4paper,14pt]{ctexart}
+\usepackage[a4paper, margin={1in,1.5in}]{geometry}
+\usepackage[fontsize=12pt]{fontsize}
+\renewcommand{\footnotesize}{\fontsize{8pt}{11pt}\selectfont}
+\usepackage{
+  url}
+
+
+\usepackage{xeCJK}
+\usepackage{zhnumber}
+
+\usepackage{titlesec}
+\usepackage{titling}
+\usepackage{fontspec}
+\usepackage{newunicodechar}
+\usepackage{tocloft} % adding the tocloft package for toc customization
+\usepackage{enumitem}
+
+\setcounter{tocdepth}{2} % table of content
+
+\setcounter{secnumdepth}{5}
+
+% note: I'm using different fonts only because I don't have yours
+% \setCJKmainfont{Noto Serif CJK TC}
+% \setCJKsansfont{Noto Sans CJK TC}
+% \setCJKmonofont{Noto Mono CJK TC}
+
+
+%中英文設定
+%\usepackage{fontspec}
+\setmainfont{TeX Gyre Termes}
+\usepackage{xeCJK} %引用中文字的指令集
+%\setCJKmainfont{PMingLiU}
+\setCJKmainfont{DFKai-SB}
+\setCJKmainfont[AutoFakeBold=4,AutoFakeSlant=.4]{DFKai-SB}   %設定軟體粗體及斜體
+% \setmainfont{Times New Roman}
+\setCJKmonofont{DFKai-SB}
+
+
+\setlength{\parindent}{2em} %首行縮排兩個漢字距離
+\usepackage{indentfirst}
+% 預設第一段不首行縮排，如果想讓第一段首行縮排，則可以使用 \usepackage{indentfirst}。
+% 如果想讓某一段不首行縮排，則可以在該段前加上 \noindent。
+% 如果想讓整篇文章都首行不縮排，則：\setlength{\parindent}{0pt}
+
+
+% in your example the titles in the toc are all sans serif, so I'll just add that here
+% feel free to leave that out in your original document,
+% it's just for visual comparability
+\renewcommand{\cftsecfont}{\bfseries\sffamily}
+\renewcommand{\cftsubsecfont}{\sffamily}
+\renewcommand{\cftsubsubsecfont}{\sffamily}
+\renewcommand{\cftparafont}{\sffamily}
+\renewcommand{\cftsubparafont}{\sffamily}
+
+% zhnum[style={Traditional,Financial}] doesn't work with the section counter,
+% so we define our own counter and increase it every time in \thesection
+\newcounter{mysec}[section]
+\renewcommand\thesection{%
+    \addtocounter{mysec}{1}%
+    \zhnum[style={Traditional,Financial}]{mysec}、}
+\renewcommand\thesubsection{\zhnum{subsection}、} % added a 、
+\renewcommand\thesubsubsection{（\zhnum{subsubsection}）} % added parentheses
+% (full-width, don't know if that's what you want)
+\renewcommand\theparagraph{} % you don't want paragraph numbers
+\renewcommand\thesubparagraph{} % nor subparagraph numbers
+
+% we have to adjust the spacing in the toc because the section label is longer than usual
+\addtolength\cftsecnumwidth{1em}
+\addtolength\cftsubsecindent{1em}
+\addtolength\cftsubsubsecindent{1em}
+
+% here we need to make sure the normal section counter is accessed
+\titleformat{\section}{\Large\bfseries\filcenter}
+    {\zhnum[style={Traditional,Financial}]{section}、}{.5em}{}
+% not really sure what you intend to achieve with \fontsize but I'll leave it here
+\titleformat*{\subsection}{\fontsize{15}{20}\bfseries\sffamily} 
+\titleformat*{\subsubsection}{\fontsize{14}{18}\bfseries\sffamily}
+
+% no extra version for numberless is necessary since no numbers are used anyways
+% also you get newlines from omitting the [display] in \titleformat already
+% \titleformat{\paragraph}
+%     {\fontsize{14}{16}\bfseries\sffamily}{}{0em}{} 
+% \titleformat{\subparagraph}
+%     {\fontsize{12}{14}\bfseries\sffamily}{}{0em}{}
+% we need the following so that they don't indent (second argument, 0em);
+% you'll have to adjust the spacing though since this is not display style anymore:
+% \titlespacing*{\paragraph}{0em}{3.25ex plus 1ex minus .2ex}{.75ex plus .1ex} 
+% \titlespacing*{\subparagraph}{0em}{3.25ex plus 1ex minus .2ex}{.75ex plus .1ex}
+
+% \renewcommand{\maketitlehooka}{\sffamily}
+
+\renewcommand{\baselinestretch}{1.2}
+\renewcommand{\abstractname}{摘要} 
+\renewcommand{\contentsname}{\hfill\bfseries 目錄 \hfill} 
+\renewcommand{\tablename}{表}
+\renewcommand{\arraystretch}{1}
+
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=[rgb]{0,0.37,0.53},
+  citecolor=[rgb]{0,0.47,0.68},
+  filecolor=[rgb]{0,0.37,0.53},
+  urlcolor=[rgb]{0,0.37,0.53},
+  % pagebackref=true, % this is ignored
+  linktoc=all}
+
+
+\usepackage{fancyhdr}%导入fancyhdr包
+
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{} 
+\cfoot{第 \thepage 頁,共\pageref*{LastPage} 頁}
+\usepackage[hang,flushmargin,bottom]{footmisc} %
+% \usepackage[]{footmisc}
+
+% \usepackage{hyperref}
+% \usepackage[utf8x]{inputenc} do not use inputenc with XeTeX
+% \usepackage{fixltx2e} not required any more
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+
+\usepackage{multirow}
+\usepackage{booktabs}
+
+\usepackage{url}
+\let\oldquote\quote
+\let\endoldquote\endquote
+\renewenvironment{quote}[2][]
+  {\if\relax\detokenize{#1}\relax
+     \def\quoteauthor{#2}%
+   \else
+     \def\quoteauthor{#2~---~#1}%
+   \fi
+   \oldquote}
+  {\par\nobreak\smallskip\hfill（\quoteauthor）%
+   \endoldquote\addvspace{\bigskipamount}}
+
+
+
+% \usepackage{ctex}
+% \author{王逸帆}
+% \date{\today}
+
+\author{王逸帆\,
+% R10A21126
+\thanks{國立臺灣大學法律學系研究所碩士班財稅法學組二年級，學號：R10A21126。}
+\vspace{-60em}
+}
+\date{}
+% \date{\ctexset{today=big}}
+\title{論短漏報空氣污染防制費之「重新計算」\\
+\large —— 以空氣污染防制法第75條為中心 \thanks{
+  111學年度第1學期「稅法專題研究」課堂報告，授課教師：柯格鐘教授。 }}
+
+
+

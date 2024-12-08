@@ -1,0 +1,364 @@
+\documentclass[14pt,a4paper]{article}
+% \documentclass[UTF8,a4paper,14pt]{ctexart}
+\usepackage[a4paper, margin={1in,1.5in}]{geometry}
+\usepackage[fontsize=12pt]{fontsize}
+\renewcommand{\footnotesize}{\fontsize{8pt}{11pt}\selectfont}
+\usepackage{
+  url}
+
+
+\usepackage{xeCJK}
+\usepackage{zhnumber}
+
+\usepackage{titlesec}
+\usepackage{titling}
+\usepackage{fontspec}
+\usepackage{newunicodechar}
+\usepackage{tocloft} % adding the tocloft package for toc customization
+\usepackage{enumitem}
+
+\setcounter{tocdepth}{2} % table of content
+
+\setcounter{secnumdepth}{5}
+
+% note: I'm using different fonts only because I don't have yours
+% \setCJKmainfont{Noto Serif CJK TC}
+% \setCJKsansfont{Noto Sans CJK TC}
+% \setCJKmonofont{Noto Mono CJK TC}
+
+
+%中英文設定
+%\usepackage{fontspec}
+\setmainfont{TeX Gyre Termes}
+\usepackage{xeCJK} %引用中文字的指令集
+%\setCJKmainfont{PMingLiU}
+\setCJKmainfont{DFKai-SB}
+\setCJKmainfont[AutoFakeBold=4,AutoFakeSlant=.4]{DFKai-SB}   %設定軟體粗體及斜體
+% \setmainfont{Times New Roman}
+\setCJKmonofont{DFKai-SB}
+
+
+\setlength{\parindent}{2em} %首行縮排兩個漢字距離
+\usepackage{indentfirst}
+% 預設第一段不首行縮排，如果想讓第一段首行縮排，則可以使用 \usepackage{indentfirst}。
+% 如果想讓某一段不首行縮排，則可以在該段前加上 \noindent。
+% 如果想讓整篇文章都首行不縮排，則：\setlength{\parindent}{0pt}
+
+
+% in your example the titles in the toc are all sans serif, so I'll just add that here
+% feel free to leave that out in your original document,
+% it's just for visual comparability
+\renewcommand{\cftsecfont}{\bfseries\sffamily}
+\renewcommand{\cftsubsecfont}{\sffamily}
+\renewcommand{\cftsubsubsecfont}{\sffamily}
+\renewcommand{\cftparafont}{\sffamily}
+\renewcommand{\cftsubparafont}{\sffamily}
+
+% zhnum[style={Traditional,Financial}] doesn't work with the section counter,
+% so we define our own counter and increase it every time in \thesection
+\newcounter{mysec}[section]
+\renewcommand\thesection{%
+    \addtocounter{mysec}{1}%
+    \zhnum[style={Traditional,Financial}]{mysec}、}
+\renewcommand\thesubsection{\zhnum{subsection}、} % added a 、
+\renewcommand\thesubsubsection{（\zhnum{subsubsection}）} % added parentheses
+% (full-width, don't know if that's what you want)
+\renewcommand\theparagraph{} % you don't want paragraph numbers
+\renewcommand\thesubparagraph{} % nor subparagraph numbers
+
+% we have to adjust the spacing in the toc because the section label is longer than usual
+\addtolength\cftsecnumwidth{1em}
+\addtolength\cftsubsecindent{1em}
+\addtolength\cftsubsubsecindent{1em}
+
+% here we need to make sure the normal section counter is accessed
+\titleformat{\section}{\Large\bfseries\filcenter}
+    {\zhnum[style={Traditional,Financial}]{section}、}{.5em}{}
+% not really sure what you intend to achieve with \fontsize but I'll leave it here
+\titleformat*{\subsection}{\fontsize{15}{20}\bfseries\sffamily} 
+\titleformat*{\subsubsection}{\fontsize{14}{18}\bfseries\sffamily}
+
+% no extra version for numberless is necessary since no numbers are used anyways
+% also you get newlines from omitting the [display] in \titleformat already
+% \titleformat{\paragraph}
+%     {\fontsize{14}{16}\bfseries\sffamily}{}{0em}{} 
+% \titleformat{\subparagraph}
+%     {\fontsize{12}{14}\bfseries\sffamily}{}{0em}{}
+% we need the following so that they don't indent (second argument, 0em);
+% you'll have to adjust the spacing though since this is not display style anymore:
+% \titlespacing*{\paragraph}{0em}{3.25ex plus 1ex minus .2ex}{.75ex plus .1ex} 
+% \titlespacing*{\subparagraph}{0em}{3.25ex plus 1ex minus .2ex}{.75ex plus .1ex}
+
+% \renewcommand{\maketitlehooka}{\sffamily}
+
+\renewcommand{\baselinestretch}{1.2}
+\renewcommand{\abstractname}{摘要} 
+\renewcommand{\contentsname}{\hfill\bfseries 目錄 \hfill} 
+\renewcommand{\tablename}{表}
+
+
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=[rgb]{0,0.37,0.53},
+  citecolor=[rgb]{0,0.47,0.68},
+  filecolor=[rgb]{0,0.37,0.53},
+  urlcolor=[rgb]{0,0.37,0.53},
+  % pagebackref=true, % this is ignored
+  linktoc=all}
+
+
+\usepackage{fancyhdr}%导入fancyhdr包
+
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{} 
+\cfoot{第 \thepage 頁,共\pageref*{LastPage} 頁}
+\usepackage[hang,flushmargin,bottom]{footmisc} %
+% \usepackage[]{footmisc}
+
+% \usepackage{hyperref}
+% \usepackage[utf8x]{inputenc} do not use inputenc with XeTeX
+% \usepackage{fixltx2e} not required any more
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+
+\usepackage{multirow}
+\usepackage{booktabs}
+
+
+% \usepackage{ctex}
+% \author{王逸帆}
+% \date{\today}
+
+\author{王逸帆\,
+% R10A21126
+\thanks{國立臺灣大學法律學系研究所碩士班財稅法學組二年級，學號：R10A21126。}
+\vspace{-60em}
+}
+\date{}
+% \date{\ctexset{today=big}}
+\title{論空氣污染防制費「重新核算」之法律性質\\
+\large —— 最高行政法院109年度上字第1125號判決簡析 \thanks{
+  111學年度第1學期「稅法專題研究」課堂報告，授課教師：柯格鐘教授。 }}
+
+
+
+
+
+
+
+
+\begin{document}
+
+\maketitle
+\makeatother
+
+\vspace{1pt}
+
+\begin{abstract}
+\setlength{\parindent}{2em}
+\noindent
+\hspace*{0.9\parindent}
+在現行財政收入之體系中，特別公課是非稅公課之一種類型。其中，具有環境管制及保護之目的者，屬於環境特別公課。作爲不同的公課類型，非稅特別公課與稅捐相比，二者之稽徵所依據之現行法規範體系不同，其財源收入之預算監督機制也不同。是否應以特別公課而非稅捐之概念定性相關之環境公課，不無爭議。而對於目前實務上所課徵之環境公課，相關法律規範仍需進一步完善。
+
+本文關注環境公課，以「空氣污染防治費」爲例，選取與「固定污染源空氣污染防治費」相關之最高行政法院109年度上字第1125號判決以及原審之臺中高等行政法院108年度訴字第288號判決，梳理案件事實，整理主要爭點並展開分析，檢視空氣污染防制法第75條對於「追補繳」空氣污染防治費之規範合理性，最後嘗試提出一些對於完善相關法律規範之期許。
+
+      \end{abstract}
+
+
+
+\thispagestyle{empty} %封面頁不編頁碼
+\clearpage
+    
+
+\tableofcontents 
+
+
+\thispagestyle{empty} %封面頁不編頁碼
+\clearpage
+\setcounter{page}{1} %從正文開始編頁碼
+
+
+
+
+
+
+
+
+
+
+\section{案例事實及爭點}
+\subsection{本案事實}
+
+本案原告（上訴人，宏全國際股份有限公司，下稱H公司）從事塑膠製品製造業，領有被告（被上訴人，臺中市政府環境保護局，簡稱臺中市環保局）核發之固定污染源射出成型程序（M01）操作許可證（下稱M01製程或M01操作許可證）及凹版印刷作業程序（M02）操作許可證（下稱M02製程或M02操作許可證）。
+
+臺中市環保局與行政院環境保護署（下稱環保署）環境督察總隊中區環境督察大隊（下稱中區督察大隊）於民國107年9月11日及107年9月20日會同臺灣臺中地方檢察署（下稱臺中地檢署）檢察官指揮內政部警政署保安警察第XX隊至H公司位於臺中市之廠區（下稱臺中廠，有塑蓋廠及標籤廠）執行聯合稽查時，要求H公司所屬人員交付該廠內製程原物料使用量之相關資料。臺中市環保局以相關資料核算後，認爲其廠內製程對於揮發性有機物（VOCs）原料使用量有短、漏報情形，列舉如表\ref{demo-table}：
+
+
+
+\begin{table}[!h]
+  \centering
+  \begin{tabular}{|l|l|c|c|l|} 
+  \hline
+                                & \multicolumn{1}{c|}{\textbf{製程（許可證）}} & \begin{tabular}[c]{@{}c@{}}\textbf{含揮發性有機物之}\\\textbf{原（物）料}\end{tabular} & \textbf{短、漏報} & \textbf{~短、漏報量（公斤）~}  \\ 
+  \hline
+  \multirow{2}{*}{\textbf{塑蓋廠}} & 塑膠射出（M01）                             & 聚乙烯及聚丙烯                                                                   & 短報            & ~~~~~~~~~ 220,840.0   \\ 
+  \cline{2-5}
+                                & 凹版印刷                                  & 油墨、溶劑                                                                     & 漏報            & ~~~~~~~~~~~ 43,588.6  \\ 
+  \hline
+  \textbf{標籤廠}                  & 凹版印刷（M02）                             & 油墨、溶劑                                                                     & 短報            & ~~~~~~ 2,695,144.9    \\
+  \hline
+  \end{tabular}
+  \caption{\label{demo-table}臺中市環保局認定H公司臺中廠VOCs使用量之短、漏報情形}
+  \end{table}
+
+
+臺中市環保局因此依空氣污染防制法第75條、空氣污染防制費收費辦法（111年3月24日修正發布前）第18條第1款及第19條第1項規定，以「公告排放係數」
+\footnote{環署空字第1050059294號公告，公私場所固定污染源申報空氣污染防制費之揮發性有機物之行業製程排放係數、操作單元(含設備元件)排放係數、控制效率及其他計量規定，見：https://oaout.epa.gov.tw/law/LawContent.aspx?id=GL005230}
+\textbf{重新核算}H公司臺中廠污染源排放量值之\textbf{2倍}計算空氣污染防制費，\textbf{追溯}5年內之應繳金額，重新核算其102年第3季至107年第2季空氣污染防制費結果，累計應補繳金額為新臺幣（下同）125,869,455元。經先發函請H公司針對核算所引用資料及金額表示意見後，審認H公司無免責之正當事由，乃以108年5月2日中市環空字第1080045552號函（下稱原處分）命H公司於文到90日內辦理繳費作業，H公司於108年5月9日完納後，循序提起訴願經決定駁回，續向臺中高等行政法院（下稱原審）提起行政訴訟，聲明：訴願決定及原處分關於應補繳空氣污染防制費超過18,548,591元部分均撤銷；前開撤銷部分，被告應返還H公司107,320,864元。經原審以108年度訴字第288號判決（下稱原判決）駁回其訴後，提起本件上訴。
+
+
+
+\subsection{本案爭點}
+基於上述案例事實之說明，本案在最高行政法院判決及原審判決中所涉及之事實爭點與法律爭點，要旨如下：
+\begin{enumerate}[itemsep=0em]
+  \item 臺中市環保局是否具有追補繳空污費之事務管轄權限？
+  \item 原告就塑蓋廠、標籤廠製程分別是否以不正當方法短、漏報與空污費計算有關之資料而逃漏空污費？
+  \item 原告主張塑蓋廠之射出機及印刷機為不同之固定污染源，應就射出機、印刷機個別認定有無空氣污染防制法第75條之適用，是否有理由？
+  \item 被告以原處分核定原告應補繳102年第3季至107年第2季空污費1億2,586萬9,455元，是否適法？
+  \item 原告主張原處分關於應補繳空污費超過1,854萬8,591元部分，應予撤銷，被告應返還原告1億732萬864元，是否有理由？
+  \item 主管機關依據空氣污染防制法第75條第1項第3款、空污費收費辦法第18條第1款及第19條第1項核算及追繳污染源排放量之2倍空污費，法律性質爲何？\label{l}
+  \item 原告主張其就本件已繳納犯罪所得，被告再對原告為實際產生之空污費以外之行政裁罰，違反一事不二罰原則，是否有理由？
+\end{enumerate}
+
+由於主題及篇幅之限制，本文將主要以爭點\ref{l}為核心，並做相關延伸，以期對環境公課及相關行政制裁法有更體系化之了解。
+
+\section{空氣污染防制費}
+在討論空氣污染防制法第75條對於重新核算費額之規範前，必須先認識空氣污染防制費。
+
+% \subsection{環境公課}
+\subsection{空氣污染防制費之法律依據}
+為防制空氣污染，維護生活環境及國民健康，以提高生活品質，立法院於1975年公布施行「空氣污染防制法」，歷經多次修法，對各空氣污染源徵收「空氣污染防制費」。行政院環保署依法律授權，訂定有「	空氣污染防制費收費辦法」，亦經多次修正。
+司法院大法官在釋字第 426 號解釋將「空氣污染防制費」定位為「特別公課」
+\footnote{節錄該號解釋理由書：「憲法增修條文第九條第二項規定：「經濟及科學技術發展，應與環境及生態保護兼籌並顧」，係課國家以維護生活環境及自然生
+態之義務，防制空氣污染為上述義務中重要項目之一。空氣污染防制法之制定符合上開憲法意旨。依該法徵收之空氣污染防制費係本於污染者付費之原則，對具有造成空氣污染共同特性之污染源，徵收一定之費用，俾經由此種付費制度，達成行為制約之功能，減少空氣中污染之程度；並以徵收所得之金錢，在環保主管機關之下成立空氣污染防制基金，專供改善空氣品質、維護國民
+健康之用途。此項防制費既係國家為一定政策目標之需要，對於有特定關係之國民所課徵之公法上負擔，並限定其課徵所得之用途，在學理上稱為特別公課，乃現代工業先進國家常用之工具。特別公課與稅捐不同，稅捐係以支應國家普通或特別施政支出為目的，以一般國民為對象，課稅構成要件須由法律明確規定，凡合乎要件者，一律由稅捐稽徵機關徵收，並以之歸入公庫，其支
+出則按通常預算程序辦理；特別公課之性質雖與稅捐有異，惟特別公課既係對義務人課予繳納金錢之負擔，故其徵收目的、對象、用途應由法律予以規定，其由法律授權命令訂定者，如授權符合具體明確之標準，亦為憲法之所許。」}。
+解釋認為「空氣污染防制費」是一種特別公課，並
+肯認特別公課係對於課徵義務人之公法上金錢負擔，作為一財政工具之類型，與稅捐公課為不同之財政工具,并且强調空氣污染防制費係本於污染者付費原則，有行為制約功能。
+
+暫時不論學者對於空污費性質之不同見解及對於廣徵特別公課現象爲害財政體系之擔憂
+\footnote{參柯格鐘，特別公課之概念及爭議－以釋字第四二六號解釋所討論之空氣污染防制費為例，月旦法學雜誌，第 163 期 ，頁194-215，2008年11月。}，
+縱使經過多次修法，已消除了部分爭議，空氣污染防制費相關之法律規範體系依舊存在一些問題。本文所選取之案例是關於固定污染源空氣污染防制費，故下文聚焦於此。
+
+
+\subsection{固定污染源空氣污染防制費計算方式}
+空氣污染防制費收費辦法（以下簡稱收費辦法）第3條第4項規定，公私場所固定污染源排放之個別空氣污染物種類排放量任一季超過一公噸者，應即依第一項規定申報、繳費。另依收費辦法第4條，公私場所依第3條規定申報空氣污染防制費且其固定污染源排放二種以上空氣污染物者，應按其個別排放量計算費額，計算公式為：
+% \begin{equation*}
+%   \begin{aligned}
+%     \text{個別空氣污染物費額}=\text{個別空氣污染物排放量}\times \text{收費費率。}
+%   \end{aligned}
+% \end{equation*}
+\[\text{個別空氣污染物費額}=\text{個別空氣污染物排放量}\times \text{收費費率。}\]
+由上開公式可知，對於固定污染源之空氣污染防制費，其總額之計算公式為：
+\begin{equation*}
+  \begin{aligned}
+    \text{空氣污染防制費}&=\sum \text{個別空氣污染物費額}\\
+    &=\sum\text{個別空氣污染物排放量}\times \text{收費費率。}
+  \end{aligned}
+\end{equation*}
+
+其中，空氣污染物排放量之計算依據，由（處分時）空氣污染防制費收費辦法第10條規範。第10條第1項條列各計算依據之順序如下：
+\begin{enumerate}[itemsep=0em]
+  \item 符合中央主管機關規定之固定污染源空氣污染物連續自動監測設施之監測資料。
+  \item 符合中央主管機關規定之空氣污染物檢測方法之檢測結果。
+  \item 經中央主管機關認可之揮發性有機物自廠係數。
+  \item 中央主管機關指定公告之空氣污染物排放係數、控制效率、質量平衡計量方式。
+  \item 其他經中央主管機關認可之排放係數或替代計算方式。
+\end{enumerate}
+又第10條第2項對於公私場所申報固定污染源揮發性有機物排放量者特別規範，原則上應以第3款之自廠係數、第4款之中央主管機關指定公告之空氣污染物排放係數、控制效率、質量平衡計量方式或第5款規定計算排放量。
+
+以上所稱之收費費率，為空氣污染防制法第17條第2、3項規定授權予主管機關訂定並公告者\footnote{環署空字第1070050299號公告，依公私場所固定污染源排放空氣污染物之種類及排放量徵收空氣污染
+防制費之收費費率，見：https://oaout.epa.gov.tw/law/LawContent.aspx?id=GL005189}，考慮固定污染源所處之防制區級別、排放之污染物種類、排放量之級別、季別等因素，且訂有優惠係數、減量係數，作爲計費之依據。
+
+
+
+% \section{臺中市政府環境保護局之事務管轄權限}
+
+\section{排放量「重新核算」之法律性質}
+本文認爲本案核心爭議為，主管機關依空氣污染防制法第75條、空氣污染防制費收費辦法（即111年3月24日修正發布前）第18條第1款及第19條第1項規定，對於短漏固定污染源空污費者以公告排放係數重新核算污染源排放量值之2倍計算空氣污染防制費，並追溯5年內之應繳金額，其法律性質爲何？是特別公課或行政罰？事關
+特別公課及行政罰之法律性質迥異，其構成要件、法律效果及所應適用之法律原則不同，故其法律性質顯著影響繳費人之權益。
+
+\subsection{原告主張}
+原告主張被告依空污費收費辦法第18條第1款及第19條第1項命原告繳納者，除就實際產生之污染課徵空污費外，尚依規定排放係數核算2倍之空污費，並重新計算追溯5年內之應繳金額，本件空污費實際上係具有懲罰性質之行政罰，而非屬特別公課。
+
+\subsection{被告主張}
+被告主張空污費為特別公課，非行政罰。
+被告援引司法院釋字第426號解釋及最高行政法院107年度判字第37號判決意旨，認爲空氣污染防制費收費辦法係主管機關根據空氣污染防制法第10條授權訂定，依此徵收之空氣污染防制費。且空氣污染防制費之徵收，係本於污染者付費之原則，對具有造成空氣污染共同特性之污染源，徵收一定之費用，俾經由此種付費制度，達成行為制約之功能，減少空氣中污染之程度，性質上屬於特別公課。因此，關於空氣污費之徵收，著重在於污染者付費，與行政罰之考量尚屬有間，故並無行政罰之懲罰性質。又依空污費收費辦法第18條第1款規定得逕依排放係數核算排放量之2倍計算空污費，作為推算實際空氣污染物排放量及追繳空污費之計算方式，尚難認其具有懲罰之用意。
+
+\subsection{法院見解}
+
+\subsubsection{原審臺中高等行政法院見解}
+
+參照環保署103年3月17日環署空字第1030022040號函
+、103年10月15日環署空字第1030080662號函、司法院釋字第426號解釋暨最高行政法院107年度判字第37號判決等意旨，空氣污染防制法第75條及空污費收費辦法第18條係規範有關公私場所固定污染源有偽造、變造或其他不正當方式短報或漏報與空污費計算有關之空氣污染排放量相關資料者，因其原申報固定污染空氣污染物排放量之代表性已有疑義，其申報資料已不可信，且調查國內業者之排放管道檢測結果之實際排放量，約為以公告排放係數核算排放量值之2倍關係，予以訂定，其排放量計算方法係屬合理，且與空氣污染防制法第16條授權依污染物排放量徵收之立法意旨相符，非屬裁罰規定，依司法院釋字第426號解釋意旨，性質上屬特別公課。從而，本件被告所為原處分係就原告短、漏報之原物料使用量，以排放係數或質量平衡重新核算該污染源排放量之2倍計算其應繳納空污費，性質上仍屬特別公課。原告主張本件空污費實際上已超出使用者付費之範疇，具有行政罰性質，自不足採。
+% 實質上，原告短、漏報空污費之時間遠高於5年，被告受限於空污費收費辦法第19條第1項規定，僅補徵原告5年空污費，已屬寬待。
+
+
+
+\subsubsection{最高行政法院見解}
+最高行政法院與原審臺中高等行政法院之見解一致。
+
+\subsection{本文評析}
+
+% 本文針對以上見解簡評如下。
+\paragraph*{空氣污染防制法第75條及（處分時）空污費收費辦法第18條第1款及第19條第1項} 
+（處分時）空污費收費辦法第18條規範短報或漏報空污費之重新核算，第19條規範追繳之追溯期間。而空氣污染防制法第75條，依據立法沿革，係將前述之（處分時）空污費收費辦法第18條及第19條提升其規範位階所為之修正。
+主管機關作成處分所依據之法律，其條文雖皆爲規範有關公私場所固定污染源有偽造、變造或其他不正當方式短報或漏報與空污費計算有關之空氣污染排放量相關資料者，然具體之要件、字句不一，應該明確區分使用。例如：空氣污染防制法第75條之構成要件為「有偽造、變造或\textbf{其他不正當方式}短報或漏報與空氣污染防制費計算有關資料者」，而空污費收費辦法第18條之構成要件為「有偽造、變造或\textbf{以故意方式}短報或漏報與空氣污染防制費計算有關資料者」。觀察收費辦法第18條之其構成要件可以得知，其適用僅限於「偽造、變造或以故意方式短報或漏報與空氣污染防制費計算有關資料者」，只處罰主觀故意為之者，不處罰過失而致短、漏報之情況，顯見具有對「過去」、「故意」違反行政義務之人非難之目的，故為具懲罰性質之行政罰。而空氣污染防制法第75條，依據立法沿革，係將（處分時）空污費收費辦法第18條及第19條提升其規範位階所為之修正，故收費辦法第 18 條與空氣污染防制法第75條之意旨應一致，具有行政裁罰之意涵。此外，從空氣污染防制法條文體系之編排上可以看到，第75條位於「罰則」之章節，前後條文皆明確爲罰則，然而，僅第75條規範「逃漏空氣污染防制費之計算徵收及追徵期限」，雖然實質上具有行政制裁之意涵，卻并未明確其裁罰之屬性。如此之法律規範難認其具備法規明確性。
+
+\paragraph*{其申報資料已不可信} 本案重新核算之依據，係主管機關所認定之短、漏報之原物料使用量，并非H公司原先所申報者。而
+判決所援引之高行政法院107年度判字第37號判決，基礎事實不同於本案。前開判決係因個案偽、變造與空污費申報有關之資料，致無從核算其申報額與實際使用量之差額，而依個案申報資料以排放係數核算其排放量2倍推算空污費。惟本件原告帳冊資料並未失真，被告可正確核算原告原申報量與實際使用量之差額。依據前開判決之意旨，似乎即不再有依空污費收費辦法第18條第1款，以排放係數核算排放量2倍計算空污費，作為「推算實際空氣污染物排放量」及追繳空污費之計算方式之必要。判決以不同原因事實之另一判決為依據而做出論述及裁判，并非合理。
+另空污費收費辦法第18條第1款應係以原告申報數值為基礎，依公告排放係數核算排放量2倍，被告以原告實際使用量依排放係數核算排放量2倍，已違反空污費收費辦法第18條第1款之規定。
+
+% 以原申報量之數額，依排放係數核算排放量2倍推算應補繳之空污費。
+
+\paragraph*{調查國內業者之排放管道檢測結果之實際排放量，約為以公告排放係數核算排放量值之2倍關係，予以訂定，其排放量計算方法係屬合理}
+公告排放係數與調查國內業者之排放管道檢測結果之實際排放量之間的差異與關係，并非可以合理化以公告排放係數核算排放量值之2倍計算「追補繳」費額之理由。蓋若以特別公課之原因者付費之原理，費額之計算以客觀要件為基礎。在空污費，其排放量及費額之計算應該依據共同的標準，即依據上文所介紹之空氣污染防制費計算方式。其中所使用之公告排放係數是否符合普遍之現實情形，應該由主管機關檢討調整，而非直接在核算費額時以不同方式計算，方符合法明確性之要求。
+
+
+\section{結論及修法建議}
+本文認爲，應厘清特別公課與行政裁罰之界限。「追補繳」費額若仍屬空污費（特別公課），則不應以高於公告排放係數之標準計算，且不論主觀可歸責性，也不應該將條文安排在罰則之中。至於對於違反空污法上義務者所加之制裁，則是屬于行政法上行政裁罰，可以有另外的裁罰基準，但應該符合法明確性、比例原則（責罰相當性）等要求。
+
+縱觀空氣污染防制法及空氣污染防制費收費辦法可知，法院判決之不合理源自於法規範的不明確、不合理。為完善空氣污染防制費之體系，本文擬提出以下幾點建議。
+\subsection{排放量之計算}
+針對排放量之計算，首要應加快推行揮發性有機物(VOCs)自廠排放係數制度之建立，特別是對於大規模之固定污染排放源，使得排放量之計算符合其實際排放情形。
+此外，在完善對於不同類型廠商的空氣污染物排放情形統計的基礎上，收費辦法第10條需增訂中央主管機關所公告之空氣污染物排放係數、控制效率、質量平衡計量方式之調整機制，使得其公告參數符合實際排放情形。
+\subsection{收費費率}
+應該充分發揮空氣污染防制法第17條第3項之規範作用，由中央主管機關根據縣市主管機關之建議，適當調整收費費率。
+將公告排放係數調整至適當之數值，使得以其計算之空氣污染物排放量符合現實情形。
+
+\subsection{明確規範短、漏報之追補繳與行政裁罰}
+針對短、漏報之追補繳，不論其主觀構成要件，應該區分是否能夠取得真實之原物料使用量，而適用不同的計算方法。首先，若主管機關可獲得或可核算得到真實的原物料使用量，也就是説可以核算出其所短、漏報之原物料使用量，則應該以實際原物料使用量，依據空氣污染防制費收費辦法第10 條規範，計算出排放量，再依據空氣污染防制費費額之計算方式得到其本應該申報繳納之空污費數額，扣除先前已繳納之費額，即可得到應補交之費額。假若其原物料使用量受僞造、變造而不可得，另需設計一套推估計算之方法，以不使其因短、漏報而獲益之前提，盡可能估算符合實際之排放量，再依據前述方式計算得到應補交之費額。
+在追、補繳費額的部分，明確規範其追溯期間。
+
+
+而針對短、漏報之罰則，應該符合行政制裁體系之基本原則。行政罰作爲對於違反行政法上義務者所加之裁罰，應該有獨立的構成要件及裁罰基準。以稅捐制裁罰體系爲例，「漏稅罰」作爲「結果罰」，應以「發生短漏稅捐結果」作爲構成要件，以「短漏金額」作爲處罰基礎。因此，在空氣污染防制費之短、漏費額的處罰（漏費罰，性質為行政罰鍰、結果罰）應該予以明確的規範。并且漏費罰應依據主觀構成要件之不同而區分爲短漏費罰及逃漏費罰。
+
+% 參照稅捐稽徵、處罰的體系，將短、漏費額的追繳（期間之規定）及短、漏費額的處罰（漏費罰，行政罰鍰，結果罰）分別予以明確的規範，其中漏費罰應區分爲短漏費罰及逃漏費罰。
+\subsection{檢討類似的其他條文}
+類似以「二倍」為計費基礎之立法方式，在空氣污染防制費收費辦法第23條對於成品槽之油燃料種類成分變更時，銷售者或進口者於出槽前未重新進行檢測並申報者之規範中也有使用。本文認爲此條文也有相似的規範性質不明確之疑慮，需要一并檢討修正。
+
+
+
+
+
+
+
+\end{document}
